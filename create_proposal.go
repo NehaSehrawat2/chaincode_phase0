@@ -40,6 +40,7 @@ type proposal struct{
 	proposal_id string `json:"proposal_id"`	
 	region string `json:"region"`
 	country string `json:"country"`
+	proposal_type string `json: "proposal_type"`
 	
 }
 // ============================================================================================================================
@@ -125,7 +126,7 @@ func (t *ManageProposal) Query(stub shim.ChaincodeStubInterface, function string
 // ============================================================================================================================
 func (t *ManageProposal) create_proposal_id(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
 	var err error
-	if len(args) != 3 {
+	if len(args) != 4 {
 		return nil, errors.New("Incorrect number of arguments. Expecting 9")
 	}
 	fmt.Println("Creating a new Form for proposal id ")
@@ -138,11 +139,15 @@ func (t *ManageProposal) create_proposal_id(stub shim.ChaincodeStubInterface, ar
 	if len(args[2]) <= 0 {
 		return nil, errors.New("3rd argument must be a non-empty string")
 	}
+	if len(args[3]) <= 0 {
+		return nil, errors.New("3rd argument must be a non-empty string")
+	}
 	
 	
 	proposal_id := args[0]
 	region := args[1]
 	country := args[2]
+	proposal_type := args[3]
 		
 	
 		
@@ -151,6 +156,7 @@ func (t *ManageProposal) create_proposal_id(stub shim.ChaincodeStubInterface, ar
 		`"proposal_id": "` + proposal_id + `" , `+
 		`"region": "` + region + `" , `+ 
 		`"country": "` + country + `"`+
+	        `"proposal_type": "` + proposal_type + `" , `
 		`}`
 		fmt.Println("input: " + input)
 		fmt.Print("input in bytes array: ")
