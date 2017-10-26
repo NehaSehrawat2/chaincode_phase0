@@ -156,7 +156,7 @@ func (t *ManageProposal) create_proposal_id(stub shim.ChaincodeStubInterface, ar
 		`"proposal_id": "` + proposal_id + `" , `+
 		`"region": "` + region + `" , `+ 
 		`"country": "` + country + `"`+
-	        `"proposal_type": "` + proposal_type + `" , `
+	        `"proposal_type": "` + proposal_type  `" `
 		`}`
 		fmt.Println("input: " + input)
 		fmt.Print("input in bytes array: ")
