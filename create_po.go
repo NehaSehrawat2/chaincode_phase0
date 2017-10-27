@@ -33,11 +33,11 @@ type Manage_po_order struct {
 
 var approved_po_order_entry = "approved_po_order_entry"	
 type po_order struct{
-								// Attributes of a Form 
+	wipro_order_reference string `json:"wipro_order_reference"`					// Attributes of a Form 
 	sap_po_order string `json:"sap_po_order"`	
 	supplier string `json:"supplier"`
 	venderso string `json:"venderso"`
-	wipro_order_reference string `json:"wipro_order_reference"`
+	
 	
 }
 
@@ -109,8 +109,10 @@ func (t *Manage_po_order) Invoke(stub shim.ChaincodeStubInterface, function stri
 	// Handle different functions
 	if function == "init" {													//initialize the chaincode state, used as reset
 		return t.Init(stub, "init", args)
-	} else if function == "create_po_order_id" {											//create a new Form
+	} else if function == "create_po_order_id" {											
 		return t.create_po_order_id(stub, args)
+	} else if function == "get_all_po_order" {											
+		return t.get_all_po_order(stub, args)
 	} 
 	fmt.Println("invoke did not find func: " + function)	
 	jsonResp := "Error : Received unknown function invocation: "+ function 				//error
@@ -128,6 +130,8 @@ func (t *Manage_po_order) Query(stub shim.ChaincodeStubInterface, function strin
 	// Handle different functions
 	if function == "get_all_po_order" {													//Read all Forms
 		return t.get_all_po_order(stub, args)
+	} else if function == "get_all_po_order" {											
+		return t.get_all_po_order(stub, args)
 	} 
 
 	fmt.Println("query did not find func: " + function)				//error
@@ -140,7 +144,7 @@ func (t *Manage_po_order) Query(stub shim.ChaincodeStubInterface, function strin
 func (t *Manage_po_order) create_po_order_id(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
 	var err error
 	if len(args) != 4 {
-		return nil, errors.New("Incorrect number of arguments. Expecting 9")
+		return nil, errors.New("Incorrect number of arguments. Expecting 4")
 	}
 	fmt.Println("Creating a new Form for po order id ")
 	if len(args[0]) <= 0 {
@@ -168,6 +172,7 @@ func (t *Manage_po_order) create_po_order_id(stub shim.ChaincodeStubInterface, a
 		`"supplier": "` + supplier + `" , `+ 
 		
 		`"venderso": "` + venderso + `"`+
+		`"wipro_order_reference": "` + wipro_order_reference + `"`+
 		`}`
 		fmt.Println("input: " + input)
 		fmt.Print("input in bytes array: ")
