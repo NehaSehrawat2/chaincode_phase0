@@ -130,9 +130,7 @@ func (t *Manage_po_order) Query(stub shim.ChaincodeStubInterface, function strin
 	// Handle different functions
 	if function == "get_all_po_order" {													//Read all Forms
 		return t.get_all_po_order(stub, args)
-	} else if function == "get_all_po_order" {											
-		return t.get_all_po_order(stub, args)
-	} 
+	}
 
 	fmt.Println("query did not find func: " + function)				//error
 	jsonResp := "Error : Received unknown function query: "+ function 
