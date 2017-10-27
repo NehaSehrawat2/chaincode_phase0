@@ -111,8 +111,6 @@ func (t *Manage_po_order) Invoke(stub shim.ChaincodeStubInterface, function stri
 		return t.Init(stub, "init", args)
 	} else if function == "create_po_order_id" {											
 		return t.create_po_order_id(stub, args)
-	} else if function == "get_all_po_order" {											
-		return t.get_all_po_order(stub, args)
 	} 
 	fmt.Println("invoke did not find func: " + function)	
 	jsonResp := "Error : Received unknown function invocation: "+ function 				//error
