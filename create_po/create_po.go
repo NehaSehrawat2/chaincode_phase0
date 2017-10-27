@@ -159,7 +159,7 @@ func (t *Manage_po_order) create_po_order_id(stub shim.ChaincodeStubInterface, a
 	sap_po_order := args[0]
 	supplier := args[1]
 	venderso := args[2]
-	wipro_order_reference := arg[3]	
+	var wipro_order_reference = arg[3]	
 	
 		
 	//build the Form json string manually
